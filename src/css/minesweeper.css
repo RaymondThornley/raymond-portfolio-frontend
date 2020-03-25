@@ -1,0 +1,23 @@
+.minesweeperSpace{
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+.minesweeperSpace.minesweeperSpaceQ{
+    font-size: 0;
+}
+
+.minesweeperSpace.minesweeperSpaceM{
+    font-size: 18px;
+    color: darkred
+}
+
+.minesweeperSpace.minesweeperSpace0{
+    color: gray
+}
+
+.minesweeperSpace.minesweeperSpaceF{
+    color: red
+}

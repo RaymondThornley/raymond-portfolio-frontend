@@ -15,7 +15,9 @@ type MinesweeperGameProps = {
 type MinesweeperGameState = {
     spaceArray: SpaceType[][],
     isFirstClick: boolean,
+    flagMode: boolean,
     hasLost: boolean,
+    hasWon: boolean
 }
 
 class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperGameState>{
@@ -26,7 +28,7 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
         for (let i = 0; i < props.yDimension; i++) {
             const spaceRow = [];
             for (let j = 0; j < props.xDimension; j++) {
-                spaceRow.push({ textValue: "?", hasMine: false });
+                spaceRow.push({ textValue: "Q", hasMine: false });
             }
             spaceArray.push(spaceRow);
         }
@@ -34,12 +36,16 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
         this.state = {
             spaceArray,
             isFirstClick: true,
-            hasLost: false
+            flagMode: false,
+            hasLost: false,
+            hasWon: false
         }
 
         this.initializeSpaceArray = this.initializeSpaceArray.bind(this);
         this.clickSpace = this.clickSpace.bind(this);
         this.calculateSpace = this.calculateSpace.bind(this);
+        this.checkWin = this.checkWin.bind(this);
+        this.toggleFlagMode = this.toggleFlagMode.bind(this);
         this.createSpace = this.createSpace.bind(this);
         this.createSpaceRow = this.createSpaceRow.bind(this);
     }
@@ -90,7 +96,7 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
             const spaceRow = [];
             for (let j = 0; j < this.props.xDimension; j++) {
                 spaceRow.push({
-                    textValue: "?",
+                    textValue: "Q",
                     hasMine: mineNumbers.indexOf(j + i * this.props.xDimension) !== -1
                 })
             }
@@ -103,18 +109,38 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
     }
 
     clickSpace(xVal: number, yVal: number) {
-        if(this.state.hasLost){
+        if (this.state.hasLost || this.state.hasWon) {
             return;
         }
         if (this.state.isFirstClick) {
-            this.initializeSpaceArray(xVal, yVal)
+            this.initializeSpaceArray(xVal, yVal);
         } else {
             this.calculateSpace(xVal, yVal, this.state.spaceArray, false);
         }
     }
 
     calculateSpace(xVal: number, yVal: number, spaceArray: SpaceType[][], isCasdade: boolean) {
-        if (spaceArray[yVal][xVal].textValue === "?") {
+        if (this.state.flagMode && spaceArray[yVal][xVal].textValue === "F") {
+            const newSpace = { ...spaceArray[yVal][xVal], textValue: ("Q") };
+            const newSpaceRow = [...spaceArray[yVal]];
+            newSpaceRow[xVal] = newSpace;
+            let newSpaceArray = [...spaceArray];
+            newSpaceArray[yVal] = newSpaceRow;
+            this.setState({ spaceArray: newSpaceArray });
+            return newSpaceArray;
+        }
+
+        if (spaceArray[yVal][xVal].textValue === "Q") {
+            if (this.state.flagMode) {
+                const newSpace = { ...spaceArray[yVal][xVal], textValue: ("F") };
+                const newSpaceRow = [...spaceArray[yVal]];
+                newSpaceRow[xVal] = newSpace;
+                let newSpaceArray = [...spaceArray];
+                newSpaceArray[yVal] = newSpaceRow;
+                this.setState({ spaceArray: newSpaceArray });
+                return newSpaceArray;
+            }
+
             if (spaceArray[yVal][xVal].hasMine) {
                 const newSpaceArray = [];
                 for (let i = 0; i < this.props.yDimension; i++) {
@@ -207,13 +233,33 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
             }
 
             if (isCasdade === false) {
-                this.setState({ spaceArray: newSpaceArray });
+                const isWin = this.checkWin(newSpaceArray);
+                if (isWin === false) {
+                    this.setState({ spaceArray: newSpaceArray });
+                }
             }
 
             return newSpaceArray;
         } else {
             return spaceArray;
         }
+    }
+
+    checkWin(spaceArray: SpaceType[][]) {
+        for (let i = 0; i < this.props.yDimension; i++) {
+            for (let j = 0; j < this.props.xDimension; j++) {
+                const space = spaceArray[i][j];
+                if (space.textValue === "Q" && space.hasMine === false) {
+                    return false;
+                }
+            }
+        }
+        this.setState({ spaceArray, hasWon: true });
+        return true;
+    }
+
+    toggleFlagMode() {
+        this.setState({ flagMode: !this.state.flagMode });
     }
 
     createSpace(yVal: number) {
@@ -236,6 +282,10 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
         return (
             <div>
                 {this.state.spaceArray.map(this.createSpaceRow)}
+                <button disabled={this.state.isFirstClick || this.state.hasWon || this.state.hasLost}
+                    onClick={this.toggleFlagMode}>{this.state.flagMode ? "Stop Flag Mode" : "Start Flag Mode"}</button>
+                {this.state.hasWon ? <span>You won!</span> : null}
+                {this.state.hasLost ? <span>You lost.</span> : null}
             </div>
         )
     }

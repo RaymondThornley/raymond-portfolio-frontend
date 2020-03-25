@@ -1,5 +1,6 @@
 import React from 'react';
 import MinesweeperGame from './MinesweeperGame';
+import '../css/minesweeper.css';
 
 type MinesweeperState = {
     xDimension: string,
