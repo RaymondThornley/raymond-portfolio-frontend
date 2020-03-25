@@ -1,7 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import HomePage from './page/Homepage';
+import HomePage from './page/HomePage';
 import NotFoundPage from './page/NotFoundPage';
+import Minesweeper from './minesweeper/Minesweeper';
 
 function App() {
     return (
@@ -9,6 +10,9 @@ function App() {
             <Switch>
                 <Route exact path="/">
                     <HomePage />
+                </Route>
+                <Route path="/minesweeper">
+                    <Minesweeper />
                 </Route>
                 <Route>
                     <NotFoundPage />
