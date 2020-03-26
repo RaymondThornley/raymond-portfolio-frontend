@@ -39,7 +39,7 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
         this.calculateSpace = this.calculateSpace.bind(this);
         this.checkWin = this.checkWin.bind(this);
         this.toggleFlagMode = this.toggleFlagMode.bind(this);
-        this.restartGame=this.restartGame.bind(this);
+        this.restartGame = this.restartGame.bind(this);
         this.createSpace = this.createSpace.bind(this);
         this.createSpaceRow = this.createSpaceRow.bind(this);
     }
@@ -281,23 +281,26 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
                 clickFunction={clickSpace}
                 xVal={xVal}
                 yVal={yVal}
+                key={xVal + " " + yVal}
             />
         }
     }
 
     createSpaceRow(spaceRow: SpaceType[], index: number) {
-        return <div>{spaceRow.map(this.createSpace(index))}</div>
+        return <div key={index}>{spaceRow.map(this.createSpace(index))}</div>
     }
 
     render() {
         return (
-            <div>
-                {this.state.spaceArray.map(this.createSpaceRow)}
-                <div>
-                    <button disabled={this.state.isFirstClick || this.state.hasWon || this.state.hasLost}
+            <div className="minesweeperGame">
+                <div className="minesweeperBoard">
+                    {this.state.spaceArray.map(this.createSpaceRow)}
+                </div>
+                <div className="minesweeperButtonList">
+                    <button className="minesweeperButton" disabled={this.state.isFirstClick || this.state.hasWon || this.state.hasLost}
                         onClick={this.toggleFlagMode}>{this.state.flagMode ? "Stop Flag Mode" : "Start Flag Mode"}</button>
-                    <button onClick={this.restartGame}>Restart Game</button>
-                    <button onClick={this.props.returnToSettings}>Return to Settings</button>
+                    <button className="minesweeperButton" onClick={this.restartGame}>Restart Game</button>
+                    <button className="minesweeperButton" onClick={this.props.returnToSettings}>Return to Settings</button>
                 </div>
                 {this.state.hasWon ? <span>You won!</span> : null}
                 {this.state.hasLost ? <span>You lost.</span> : null}
