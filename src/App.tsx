@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import HomePage from './page/HomePage';
 import NotFoundPage from './page/NotFoundPage';
 import Minesweeper from './minesweeper/Minesweeper';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
     return (

@@ -10,8 +10,8 @@ type MinesweeperSpaceProps = {
 const MinesweeperSpace = (props: MinesweeperSpaceProps) => {
     const clickFunction = function () { props.clickFunction(props.xVal, props.yVal) }
 
-    return <input type="button" value={props.textValue} onClick={clickFunction}
-        className={"minesweeperSpace minesweeperSpace" + props.textValue} />
+    return <span className={"minesweeperSpace minesweeperSpace" + props.textValue}
+        onClick={clickFunction}>{props.textValue}</span>
 }
 
 export default MinesweeperSpace;

@@ -17,10 +17,29 @@
 }
 
 .minesweeperSpace{
+    line-height: 24px;
     height: 30px;
     width: 30px;
     vertical-align: middle;
     font-size: 20px;
+    text-rendering: auto;
+    color: black;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    background-color: lightgray;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: lightgray;
+    border-image: initial;
 }
 
 .minesweeperSpace.minesweeperSpaceQ{
