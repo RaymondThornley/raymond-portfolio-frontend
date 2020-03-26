@@ -36,6 +36,7 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
         this.blurMine = this.blurMine.bind(this);
         this.validateMinesInDimensions = this.validateMinesInDimensions.bind(this);
         this.startGame = this.startGame.bind(this);
+        this.returnToSettings = this.returnToSettings.bind(this);
     }
 
     changeX(event: React.SyntheticEvent<HTMLInputElement>) {
@@ -47,7 +48,7 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
 
     blurX(event: React.SyntheticEvent<HTMLInputElement>) {
         const newValue = event.currentTarget.value;
-        if (newValue === ""|| newValue === "0") {
+        if (newValue === "" || newValue === "0") {
             this.setState({ hasXError: true });
         } else {
             this.setState({ hasXError: false });
@@ -58,13 +59,13 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
     changeY(event: React.SyntheticEvent<HTMLInputElement>) {
         const newValue = event.currentTarget.value;
         if (newValue === "" || newValue === "0" || newValue.match("^[1-9]\\d{0,1}$")) {
-            this.setState({ yDimension: newValue});
+            this.setState({ yDimension: newValue });
         }
     }
 
     blurY(event: React.SyntheticEvent<HTMLInputElement>) {
         const newValue = event.currentTarget.value;
-        if (newValue === ""|| newValue === "0") {
+        if (newValue === "" || newValue === "0") {
             this.setState({ hasYError: true });
         } else {
             this.setState({ hasYError: false });
@@ -75,13 +76,13 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
     changeMine(event: React.SyntheticEvent<HTMLInputElement>) {
         const newValue = event.currentTarget.value;
         if (newValue === "" || newValue === "0" || newValue.match("^[1-9]\\d{0,2}$")) {
-            this.setState({ mineNumber: newValue});
+            this.setState({ mineNumber: newValue });
         }
     }
 
     blurMine(event: React.SyntheticEvent<HTMLInputElement>) {
         const newValue = event.currentTarget.value;
-        if (newValue === ""|| newValue === "0") {
+        if (newValue === "" || newValue === "0") {
             this.setState({ hasMineError: true });
         } else {
             this.setState({ hasMineError: false });
@@ -104,6 +105,10 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
         this.setState({ isGameActive: true });
     }
 
+    returnToSettings() {
+        this.setState({ isGameActive: false });
+    }
+
     render() {
         const isButtonDisabled = this.state.hasXError || this.state.hasYError || this.state.hasMineError
             || this.state.hasMineInDimensionError;
@@ -115,6 +120,7 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
                         xDimension={Number(this.state.xDimension)}
                         yDimension={Number(this.state.yDimension)}
                         mineNumber={Number(this.state.mineNumber)}
+                        returnToSettings={this.returnToSettings}
                     />
                     :
                     <div>

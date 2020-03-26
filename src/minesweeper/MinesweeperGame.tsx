@@ -9,7 +9,8 @@ type SpaceType = {
 type MinesweeperGameProps = {
     xDimension: number,
     yDimension: number,
-    mineNumber: number
+    mineNumber: number,
+    returnToSettings: () => void
 }
 
 type MinesweeperGameState = {
@@ -24,30 +25,35 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
     constructor(props: MinesweeperGameProps) {
         super(props);
 
-        const spaceArray = [];
-        for (let i = 0; i < props.yDimension; i++) {
-            const spaceRow = [];
-            for (let j = 0; j < props.xDimension; j++) {
-                spaceRow.push({ textValue: "Q", hasMine: false });
-            }
-            spaceArray.push(spaceRow);
-        }
-
         this.state = {
-            spaceArray,
+            spaceArray: this.createEmptySpaceArray(),
             isFirstClick: true,
             flagMode: false,
             hasLost: false,
             hasWon: false
         }
 
+        this.createEmptySpaceArray = this.createEmptySpaceArray.bind(this);
         this.initializeSpaceArray = this.initializeSpaceArray.bind(this);
         this.clickSpace = this.clickSpace.bind(this);
         this.calculateSpace = this.calculateSpace.bind(this);
         this.checkWin = this.checkWin.bind(this);
         this.toggleFlagMode = this.toggleFlagMode.bind(this);
+        this.restartGame=this.restartGame.bind(this);
         this.createSpace = this.createSpace.bind(this);
         this.createSpaceRow = this.createSpaceRow.bind(this);
+    }
+
+    createEmptySpaceArray() {
+        const spaceArray = [];
+        for (let i = 0; i < this.props.yDimension; i++) {
+            const spaceRow = [];
+            for (let j = 0; j < this.props.xDimension; j++) {
+                spaceRow.push({ textValue: "Q", hasMine: false });
+            }
+            spaceArray.push(spaceRow);
+        }
+        return spaceArray;
     }
 
     initializeSpaceArray(xVal: number, yVal: number) {
@@ -121,7 +127,7 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
 
     calculateSpace(xVal: number, yVal: number, spaceArray: SpaceType[][], isCasdade: boolean) {
         if (this.state.flagMode && spaceArray[yVal][xVal].textValue === "F") {
-            const newSpace = { ...spaceArray[yVal][xVal], textValue: ("Q") };
+            const newSpace = { ...spaceArray[yVal][xVal], textValue: "Q" };
             const newSpaceRow = [...spaceArray[yVal]];
             newSpaceRow[xVal] = newSpace;
             let newSpaceArray = [...spaceArray];
@@ -132,7 +138,7 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
 
         if (spaceArray[yVal][xVal].textValue === "Q") {
             if (this.state.flagMode) {
-                const newSpace = { ...spaceArray[yVal][xVal], textValue: ("F") };
+                const newSpace = { ...spaceArray[yVal][xVal], textValue: "F" };
                 const newSpaceRow = [...spaceArray[yVal]];
                 newSpaceRow[xVal] = newSpace;
                 let newSpaceArray = [...spaceArray];
@@ -262,6 +268,11 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
         this.setState({ flagMode: !this.state.flagMode });
     }
 
+    restartGame() {
+        const newSpaceArray = this.createEmptySpaceArray();
+        this.setState({ spaceArray: newSpaceArray, isFirstClick: true, flagMode: false, hasLost: false, hasWon: false });
+    }
+
     createSpace(yVal: number) {
         const clickSpace = this.clickSpace
         return function (space: SpaceType, xVal: number) {
@@ -282,8 +293,12 @@ class MinesweeperGame extends React.Component<MinesweeperGameProps, MinesweeperG
         return (
             <div>
                 {this.state.spaceArray.map(this.createSpaceRow)}
-                <button disabled={this.state.isFirstClick || this.state.hasWon || this.state.hasLost}
-                    onClick={this.toggleFlagMode}>{this.state.flagMode ? "Stop Flag Mode" : "Start Flag Mode"}</button>
+                <div>
+                    <button disabled={this.state.isFirstClick || this.state.hasWon || this.state.hasLost}
+                        onClick={this.toggleFlagMode}>{this.state.flagMode ? "Stop Flag Mode" : "Start Flag Mode"}</button>
+                    <button onClick={this.restartGame}>Restart Game</button>
+                    <button onClick={this.props.returnToSettings}>Return to Settings</button>
+                </div>
                 {this.state.hasWon ? <span>You won!</span> : null}
                 {this.state.hasLost ? <span>You lost.</span> : null}
             </div>
