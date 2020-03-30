@@ -10,7 +10,8 @@ type MinesweeperState = {
     hasXError: boolean,
     hasYError: boolean,
     hasMineError: boolean,
-    hasMineInDimensionError: boolean
+    hasDimensionError: boolean,
+    dimentionErrorText: string
 }
 
 class Minesweeper extends React.Component<{}, MinesweeperState> {
@@ -25,7 +26,8 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
             hasXError: false,
             hasYError: false,
             hasMineError: false,
-            hasMineInDimensionError: false
+            hasDimensionError: false,
+            dimentionErrorText: ""
         }
 
         this.changeX = this.changeX.bind(this);
@@ -34,7 +36,7 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
         this.blurY = this.blurY.bind(this);
         this.changeMine = this.changeMine.bind(this);
         this.blurMine = this.blurMine.bind(this);
-        this.validateMinesInDimensions = this.validateMinesInDimensions.bind(this);
+        this.validateDimensions = this.validateDimensions.bind(this);
         this.startGame = this.startGame.bind(this);
         this.returnToSettings = this.returnToSettings.bind(this);
     }
@@ -52,7 +54,7 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
             this.setState({ hasXError: true });
         } else {
             this.setState({ hasXError: false });
-            this.validateMinesInDimensions(newValue, this.state.yDimension, this.state.mineNumber);
+            this.validateDimensions(newValue, this.state.yDimension, this.state.mineNumber);
         }
     }
 
@@ -69,7 +71,7 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
             this.setState({ hasYError: true });
         } else {
             this.setState({ hasYError: false });
-            this.validateMinesInDimensions(this.state.xDimension, newValue, this.state.mineNumber);
+            this.validateDimensions(this.state.xDimension, newValue, this.state.mineNumber);
         }
     }
 
@@ -86,18 +88,20 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
             this.setState({ hasMineError: true });
         } else {
             this.setState({ hasMineError: false });
-            this.validateMinesInDimensions(this.state.xDimension, this.state.yDimension, newValue);
+            this.validateDimensions(this.state.xDimension, this.state.yDimension, newValue);
         }
     }
 
-    validateMinesInDimensions(xDimension: string, yDimension: string, mineNumber: string) {
+    validateDimensions(xDimension: string, yDimension: string, mineNumber: string) {
         const xVal = Number(xDimension);
         const yVal = Number(yDimension);
         const mineVal = Number(mineNumber);
-        if (mineVal + 10 > xVal * yVal) {
-            this.setState({ hasMineInDimensionError: true });
+        if (xVal * yVal > 2000) {
+            this.setState({ hasDimensionError: true, dimentionErrorText: "Error: Number of spaces can't exceed 2000" });
+        } else if (mineVal + 10 > xVal * yVal) {
+            this.setState({ hasDimensionError: true, dimentionErrorText: "Error: Too many mines for dimensions" });
         } else {
-            this.setState({ hasMineInDimensionError: false });
+            this.setState({ hasDimensionError: false });
         }
     }
 
@@ -111,10 +115,17 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
 
     render() {
         const isButtonDisabled = this.state.hasXError || this.state.hasYError || this.state.hasMineError
-            || this.state.hasMineInDimensionError;
+            || this.state.hasDimensionError;
+
+        let mineDensityText = "";
+        if (isButtonDisabled === false) {
+            const mineDensity = (Number(this.state.mineNumber) * 100 / (Number(this.state.xDimension) * Number(this.state.yDimension))).toFixed(1) + "%";
+            mineDensityText = "Mine density is " + mineDensity;
+        }
 
         return (
             <React.Fragment>
+                <h2 className="minesweeperTitle">Minesweeper</h2>
                 {this.state.isGameActive ?
                     <MinesweeperGame
                         xDimension={Number(this.state.xDimension)}
@@ -123,7 +134,7 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
                         returnToSettings={this.returnToSettings}
                     />
                     :
-                    <div>
+                    <div className="minesweeperSettingsContainer">
                         <div>
                             <label htmlFor="xDimension">X Dimension:</label>
                             <input type="text" name="xDimension" value={this.state.xDimension}
@@ -142,7 +153,9 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
                                 onChange={this.changeMine} onBlur={this.blurMine} />
                             {this.state.hasMineError ? <span>Error: Mine value must not be blank or zero</span> : null}
                         </div>
-                        {this.state.hasMineInDimensionError ? <div>Error: Too many mines for specified dimensions</div> : null}
+                        {this.state.hasDimensionError ?
+                            <div>{this.state.dimentionErrorText}</div> :
+                            <div>{mineDensityText}</div>}
                         <button disabled={isButtonDisabled} onClick={this.startGame}>Start Game</button>
                     </div>
                 }

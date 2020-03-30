@@ -1,13 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Navbar, NavLink } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class PageHeader extends React.Component {
     render() {
         return (
-            <div>
-                <Link to="/">Home</Link>
-                <Link to="/minesweeper">Minesweeper</Link>
-            </div>
+            <Navbar>
+                <LinkContainer to="/"><NavLink>Home</NavLink></LinkContainer>
+                <LinkContainer to="/minesweeper"><NavLink>Minesweeper</NavLink></LinkContainer>
+            </Navbar>
         );
     }
 }
