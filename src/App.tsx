@@ -6,6 +6,7 @@ import HomePage from './page/HomePage';
 import NotFoundPage from './page/NotFoundPage';
 import Minesweeper from './minesweeper/Minesweeper';
 import 'bootstrap/dist/css/bootstrap.css';
+import '../src/css/page.css'
 
 function App() {
     return (

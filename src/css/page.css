@@ -1,5 +1,10 @@
-.infoSection{
+.mainPage{
+    margin-left: 10px;
+}
 
+.infoSection{
+    margin-left: 10px;
+    margin-top: 20px;
 }
 
 .infoSectionTitle{
@@ -7,7 +12,8 @@
 }
 
 .infoSectionLine{
-
+    margin-left: 10px;
+    display: block;
 }
 
 .infoSectionList{
@@ -16,4 +22,12 @@
 
 .infoSectionListItem{
     
+}
+
+.notFoundPage{
+
+}
+
+.notFoundPageText{
+    text-align: center;
 }
