@@ -5,6 +5,7 @@ import PageFooter from './page/PageFooter';
 import HomePage from './page/HomePage';
 import NotFoundPage from './page/NotFoundPage';
 import Minesweeper from './minesweeper/Minesweeper';
+import TankWars from './tankWars/TankWars';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../src/css/page.css'
 
@@ -18,6 +19,9 @@ function App() {
                 </Route>
                 <Route path="/minesweeper">
                     <Minesweeper />
+                </Route>
+                <Route path="/tankwars">
+                    <TankWars />
                 </Route>
                 <Route>
                     <NotFoundPage />
