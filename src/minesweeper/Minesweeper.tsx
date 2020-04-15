@@ -15,7 +15,7 @@ type MinesweeperState = {
 }
 
 class Minesweeper extends React.Component<{}, MinesweeperState> {
-    constructor(props: any) {
+    constructor(props: {}) {
         super(props);
 
         this.state = {
