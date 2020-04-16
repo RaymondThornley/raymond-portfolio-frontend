@@ -1,4 +1,5 @@
 import React from 'react';
+import MastermindGame from './MastermindGame';
 
 type optionType = {
     numOptions: number,
@@ -25,12 +26,14 @@ const optionList: optionType[] = [
 ]
 
 type MastermindState = {
-    selectedOptionType: optionType,
-    numItems: number,
+    selectedOptionType: number,
+    numItems: string,
     isDuplicatesAllowed: boolean,
-    isInfiniteGuesses: boolean,
     numGuesses: string,
-    isGameActive: boolean
+    isGameActive: boolean,
+    hasItemError: boolean,
+    hasGuessError: boolean,
+    hasTooManyItemsError: boolean
 }
 
 class Mastermind extends React.Component<{}, MastermindState> {
@@ -38,21 +41,140 @@ class Mastermind extends React.Component<{}, MastermindState> {
         super(props);
 
         this.state = {
-            selectedOptionType: optionList[0],
-            numItems: 4,
+            selectedOptionType: 0,
+            numItems: "4",
             isDuplicatesAllowed: false,
-            isInfiniteGuesses: false,
             numGuesses: "10",
-            isGameActive: false
+            isGameActive: false,
+            hasItemError: false,
+            hasGuessError: false,
+            hasTooManyItemsError: false
+        }
+
+        this.changeOption = this.changeOption.bind(this);
+        this.changeItemNum = this.changeItemNum.bind(this);
+        this.blurItemNum = this.blurItemNum.bind(this);
+        this.toggleDuplicates = this.toggleDuplicates.bind(this);
+        this.changeGuessNum = this.changeGuessNum.bind(this);
+        this.blurGuessNum = this.blurGuessNum.bind(this);
+        this.createOption = this.createOption.bind(this);
+        this.startGame = this.startGame.bind(this);
+        this.returnToSettings = this.returnToSettings.bind(this);
+    }
+
+    changeOption(event: React.SyntheticEvent<HTMLSelectElement>) {
+        const newValue = Number(event.currentTarget.value);
+        this.setState({ selectedOptionType: newValue });
+        this.validateTooManyItems(newValue, this.state.numItems, this.state.isDuplicatesAllowed);
+    }
+
+    changeItemNum(event: React.SyntheticEvent<HTMLInputElement>) {
+        const newValue = event.currentTarget.value;
+        if (newValue === "" || newValue === "0" || newValue.match("^[1-9]\\d{0,1}$")) {
+            this.setState({ numItems: newValue });
         }
     }
 
+    blurItemNum(event: React.SyntheticEvent<HTMLInputElement>) {
+        const newValue = event.currentTarget.value;
+        if (newValue === "" || newValue === "0") {
+            this.setState({ hasItemError: true });
+        } else {
+            this.setState({ hasItemError: false });
+            this.validateTooManyItems(this.state.selectedOptionType, newValue, this.state.isDuplicatesAllowed);
+        }
+    }
+
+    toggleDuplicates(event: React.SyntheticEvent<HTMLInputElement>) {
+        const newValue = event.currentTarget.checked;
+        this.setState({ isDuplicatesAllowed: newValue });
+        this.validateTooManyItems(this.state.selectedOptionType, this.state.numItems, newValue);
+    }
+
+    changeGuessNum(event: React.SyntheticEvent<HTMLInputElement>) {
+        const newValue = event.currentTarget.value;
+        if (newValue === "" || newValue === "0" || newValue.match("^[1-9]\\d{0,1}$")) {
+            this.setState({ numGuesses: newValue });
+        }
+    }
+
+    blurGuessNum(event: React.SyntheticEvent<HTMLInputElement>) {
+        const newValue = event.currentTarget.value;
+        if (newValue === "" || newValue === "0") {
+            this.setState({ hasGuessError: true });
+        } else {
+            this.setState({ hasGuessError: false });
+        }
+    }
+
+    validateTooManyItems(selectedOptionType: number, numItems: string, isDuplicatesAllowed: boolean) {
+        if (isDuplicatesAllowed === false && optionList[selectedOptionType].numOptions < Number(numItems)) {
+            this.setState({ hasTooManyItemsError: true });
+        } else {
+            this.setState({ hasTooManyItemsError: false });
+        }
+    }
+
+    createOption(option: optionType, index: number) {
+        return (
+            <option value={index}>{option.optionTypeName + " (" + option.numOptions + " options)"}</option>
+        )
+    }
+
+    startGame() {
+        this.setState({ isGameActive: true });
+    }
+
+    returnToSettings() {
+        this.setState({ isGameActive: false });
+    }
+
     render() {
+        const isButtonDisabled = this.state.hasItemError || this.state.hasGuessError || this.state.hasTooManyItemsError
+
         return (
             <React.Fragment>
                 {this.state.isGameActive ?
-                    <div></div> :
-                    <div></div>}
+                    <MastermindGame
+                        numOptions={optionList[this.state.selectedOptionType].numOptions}
+                        optionTypeName={optionList[this.state.selectedOptionType].optionTypeName}
+                        optionNames={optionList[this.state.selectedOptionType].optionNames}
+                        numItems={Number(this.state.numItems)}
+                        isDuplicatesAllowed={this.state.isDuplicatesAllowed}
+                        numGuesses={Number(this.state.numGuesses)}
+                        returnToSettings={this.returnToSettings}
+                    />
+                    :
+                    <div className="mastermindSettingsContainer">
+                        <div>
+                            <label htmlFor="selectOption">Choose options:</label>
+                            <select name="selectOption" value={this.state.selectedOptionType}
+                                onChange={this.changeOption}>
+                                {optionList.map(this.createOption)}
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="numItems">Number of items to guess:</label>
+                            <input type="text" name="numItems" value={this.state.numItems}
+                                onChange={this.changeItemNum} onBlur={this.blurItemNum} />
+                            {this.state.hasItemError ? <span>Error: Number of Items value must not be blank or zero</span> : null}
+                        </div>
+                        <div>
+                            <label htmlFor="allowDuplicates">Allow Duplicates:</label>
+                            <input type="checkbox" name="allowDuplicates" checked={this.state.isDuplicatesAllowed}
+                                onChange={this.toggleDuplicates} />
+                        </div>
+                        <div>
+                            <label htmlFor="numGuesses">Number of guesses:</label>
+                            <input type="text" name="numGuesses" value={this.state.numGuesses}
+                                onChange={this.changeGuessNum} onBlur={this.blurGuessNum} />
+                            {this.state.hasGuessError ? <span>Error: Number of Guesses value must not be blank or zero</span> : null}
+                        </div>
+                        {this.state.hasTooManyItemsError ?
+                            <div>Error: Too may items for current option list is no duplicates</div> : null}
+                        <button disabled={isButtonDisabled} onClick={this.startGame}>Start Game</button>
+                    </div>
+                }
             </React.Fragment>
         );
     }
