@@ -141,7 +141,7 @@ class MastermindGame extends React.Component<MastermindGameProps, MastermindGame
         }
 
         return (
-            <td>
+            <td key={index}>
                 <select value={this.state.guessList[index]} onChange={changeGuess}>
                     {this.props.optionNames.map(this.createOption)}
                 </select>
@@ -174,8 +174,8 @@ class MastermindGame extends React.Component<MastermindGameProps, MastermindGame
         }
 
         return (
-            <>
-                <table>
+            <React.Fragment>
+                <table className="mastermindGuessTable">
                     <thead>
                         <tr>
                             <td>Guess Number</td>
@@ -195,10 +195,12 @@ class MastermindGame extends React.Component<MastermindGameProps, MastermindGame
                         </tr>
                     </tfoot>
                 </table>
-                <button onClick={this.checkGuess} disabled={this.state.isWin || this.state.isLose || hasDuplicate}>Check Guess</button>
-                <button onClick={this.props.returnToSettings}>Return to Settings</button>
-                <span>{bottomText}</span>
-            </>
+                <div className="mastermindButtonContainer">
+                    <button onClick={this.checkGuess} disabled={this.state.isWin || this.state.isLose || hasDuplicate}>Check Guess</button>
+                    <button onClick={this.props.returnToSettings}>Return to Settings</button>
+                </div>
+                <div className="masterminBottomText">{bottomText}</div>
+            </React.Fragment>
         );
     }
 }

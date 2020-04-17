@@ -6,6 +6,19 @@
     text-align: center;
 }
 
+.minesweeperSettingsTable{
+    table-layout: fixed;
+    width: 100%;
+}
+
+.minesweeperSettingsTableLabel{
+    text-align: right;
+}
+
+.minesweeperSettingsTableOption{
+    text-align: left;
+}
+
 .minesweeperGame{
     display: flex;
     flex-direction: column;

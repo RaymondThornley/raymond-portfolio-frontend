@@ -1,5 +1,6 @@
 import React from 'react';
 import MastermindGame from './MastermindGame';
+import '../css/mastermind.css';
 
 type optionType = {
     numOptions: number,
@@ -57,9 +58,9 @@ class Mastermind extends React.Component<{}, MastermindState> {
         this.toggleDuplicates = this.toggleDuplicates.bind(this);
         this.changeGuessNum = this.changeGuessNum.bind(this);
         this.blurGuessNum = this.blurGuessNum.bind(this);
-        this.createOption = this.createOption.bind(this);
         this.startGame = this.startGame.bind(this);
         this.returnToSettings = this.returnToSettings.bind(this);
+        this.createOption = this.createOption.bind(this);
     }
 
     changeOption(event: React.SyntheticEvent<HTMLSelectElement>) {
@@ -115,12 +116,6 @@ class Mastermind extends React.Component<{}, MastermindState> {
         }
     }
 
-    createOption(option: optionType, index: number) {
-        return (
-            <option value={index}>{option.optionTypeName + " (" + option.numOptions + " options)"}</option>
-        )
-    }
-
     startGame() {
         this.setState({ isGameActive: true });
     }
@@ -129,11 +124,20 @@ class Mastermind extends React.Component<{}, MastermindState> {
         this.setState({ isGameActive: false });
     }
 
+    createOption(option: optionType, index: number) {
+        return (
+            <option value={index} key={index}>
+                {option.optionTypeName + " (" + option.numOptions + " options)"}
+            </option>
+        )
+    }
+
     render() {
         const isButtonDisabled = this.state.hasItemError || this.state.hasGuessError || this.state.hasTooManyItemsError
 
         return (
             <React.Fragment>
+                <h2 className="mastermindTitle">Mastermind</h2>
                 {this.state.isGameActive ?
                     <MastermindGame
                         numOptions={optionList[this.state.selectedOptionType].numOptions}
@@ -146,30 +150,48 @@ class Mastermind extends React.Component<{}, MastermindState> {
                     />
                     :
                     <div className="mastermindSettingsContainer">
-                        <div>
-                            <label htmlFor="selectOption">Choose options:</label>
-                            <select name="selectOption" value={this.state.selectedOptionType}
-                                onChange={this.changeOption}>
-                                {optionList.map(this.createOption)}
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="numItems">Number of items to guess:</label>
-                            <input type="text" name="numItems" value={this.state.numItems}
-                                onChange={this.changeItemNum} onBlur={this.blurItemNum} />
-                            {this.state.hasItemError ? <span>Error: Number of Items value must not be blank or zero</span> : null}
-                        </div>
-                        <div>
-                            <label htmlFor="allowDuplicates">Allow Duplicates:</label>
-                            <input type="checkbox" name="allowDuplicates" checked={this.state.isDuplicatesAllowed}
-                                onChange={this.toggleDuplicates} />
-                        </div>
-                        <div>
-                            <label htmlFor="numGuesses">Number of guesses:</label>
-                            <input type="text" name="numGuesses" value={this.state.numGuesses}
-                                onChange={this.changeGuessNum} onBlur={this.blurGuessNum} />
-                            {this.state.hasGuessError ? <span>Error: Number of Guesses value must not be blank or zero</span> : null}
-                        </div>
+                        <table className="mastermindSettingsTable"><tbody>
+                            <tr>
+                                <td className="mastermindSettingsTableLabel">
+                                    <label htmlFor="selectOption">Choose options:</label>
+                                </td>
+                                <td className="mastermindSettingsTableOption">
+                                    <select name="selectOption" value={this.state.selectedOptionType}
+                                        onChange={this.changeOption}>
+                                        {optionList.map(this.createOption)}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="mastermindSettingsTableLabel">
+                                    <label htmlFor="numItems">Number of items to guess:</label>
+                                </td>
+                                <td className="mastermindSettingsTableOption">
+                                    <input type="text" name="numItems" value={this.state.numItems}
+                                        onChange={this.changeItemNum} onBlur={this.blurItemNum} />
+                                    {this.state.hasItemError ? <span>Error: Number of Items value must not be blank or zero</span> : null}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="mastermindSettingsTableLabel">
+                                    <label htmlFor="allowDuplicates">Allow Duplicates:</label>
+                                </td>
+                                <td className="mastermindSettingsTableOption">
+                                    <input type="checkbox" name="allowDuplicates" checked={this.state.isDuplicatesAllowed}
+                                        onChange={this.toggleDuplicates} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="mastermindSettingsTableLabel">
+                                    <label htmlFor="numGuesses">Number of guesses:</label>
+                                </td>
+                                <td className="mastermindSettingsTableOption">
+                                    <input type="text" name="numGuesses" value={this.state.numGuesses}
+                                        onChange={this.changeGuessNum} onBlur={this.blurGuessNum} />
+                                    {this.state.hasGuessError ? <span>Error: Number of Guesses value must not be blank or zero</span> : null}
+                                </td>
+                            </tr>
+                        </tbody></table>
                         {this.state.hasTooManyItemsError ?
                             <div>Error: Too may items for current option list is no duplicates</div> : null}
                         <button disabled={isButtonDisabled} onClick={this.startGame}>Start Game</button>
