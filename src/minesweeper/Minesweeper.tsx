@@ -15,7 +15,7 @@ type MinesweeperState = {
 }
 
 class Minesweeper extends React.Component<{}, MinesweeperState> {
-    constructor(props: any) {
+    constructor(props: {}) {
         super(props);
 
         this.state = {
@@ -135,24 +135,38 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
                     />
                     :
                     <div className="minesweeperSettingsContainer">
-                        <div>
-                            <label htmlFor="xDimension">X Dimension:</label>
-                            <input type="text" name="xDimension" value={this.state.xDimension}
-                                onChange={this.changeX} onBlur={this.blurX} />
-                            {this.state.hasXError ? <span>Error: Dimension value must not be blank or zero</span> : null}
-                        </div>
-                        <div>
-                            <label htmlFor="yDimension">Y Dimension:</label>
-                            <input type="text" name="yDimension" value={this.state.yDimension}
-                                onChange={this.changeY} onBlur={this.blurY} />
-                            {this.state.hasYError ? <span>Error: Dimension value must not be blank or zero</span> : null}
-                        </div>
-                        <div>
-                            <label htmlFor="mineNumber">Mine Number:</label>
-                            <input type="text" name="mineNumber" value={this.state.mineNumber}
-                                onChange={this.changeMine} onBlur={this.blurMine} />
-                            {this.state.hasMineError ? <span>Error: Mine value must not be blank or zero</span> : null}
-                        </div>
+                        <table className="minesweeperSettingsTable"><tbody>
+                            <tr>
+                                <td className="minesweeperSettingsTableLabel">
+                                    <label htmlFor="xDimension">X Dimension:</label>
+                                </td>
+                                <td className="minesweeperSettingsTableOption">
+                                    <input type="text" name="xDimension" value={this.state.xDimension}
+                                        onChange={this.changeX} onBlur={this.blurX} />
+                                    {this.state.hasXError ? <span>Error: Dimension value must not be blank or zero</span> : null}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="minesweeperSettingsTableLabel">
+                                    <label htmlFor="yDimension">Y Dimension:</label>
+                                </td>
+                                <td className="minesweeperSettingsTableOption">
+                                    <input type="text" name="yDimension" value={this.state.yDimension}
+                                        onChange={this.changeY} onBlur={this.blurY} />
+                                    {this.state.hasYError ? <span>Error: Dimension value must not be blank or zero</span> : null}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="minesweeperSettingsTableLabel">
+                                    <label htmlFor="mineNumber">Mine Number:</label>
+                                </td>
+                                <td className="minesweeperSettingsTableOption">
+                                    <input type="text" name="mineNumber" value={this.state.mineNumber}
+                                        onChange={this.changeMine} onBlur={this.blurMine} />
+                                    {this.state.hasMineError ? <span>Error: Mine value must not be blank or zero</span> : null}
+                                </td>
+                            </tr>
+                        </tbody></table>
                         {this.state.hasDimensionError ?
                             <div>{this.state.dimentionErrorText}</div> :
                             <div>{mineDensityText}</div>}

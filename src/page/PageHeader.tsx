@@ -7,6 +7,7 @@ class PageHeader extends React.Component {
         return (
             <Navbar>
                 <LinkContainer to="/"><NavLink>Home</NavLink></LinkContainer>
+                <LinkContainer to="/mastermind"><NavLink>Mastermind</NavLink></LinkContainer>
                 <LinkContainer to="/minesweeper"><NavLink>Minesweeper</NavLink></LinkContainer>
                 <LinkContainer to="/tankwars"><NavLink>Tank Wars</NavLink></LinkContainer>
             </Navbar>
