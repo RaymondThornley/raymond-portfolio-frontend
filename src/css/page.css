@@ -1,5 +1,20 @@
 .mainPage{
-    margin-left: 10px;
+    
+}
+
+.mainPageTitle{
+    text-align: center;
+}
+
+.externalLink{
+    display: block;
+    
+}
+
+.linkImage{
+    height: 20px;
+    width: 20px;
+    margin: 5px;
 }
 
 .infoSection{
