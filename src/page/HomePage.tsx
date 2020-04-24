@@ -8,12 +8,14 @@ class HomePage extends React.Component {
                 <h1 className="mainPageTitle">Raymond Thornley</h1>
                 <Row>
                     <Col xs={12} sm={{ span: 11, offset: 1 }} lg={{ order: 1, span: 3, offset: 0 }} >
-                        <h4 className="infoSectionTitle">About me</h4>
-                        <span className="infoSectionLine">Raymond Thornley is a 25 year old living in the Twin Cities</span>
-                        <a href="https://www.linkedin.com/in/raymond-thornley-481847bb/" className="externalLink">
-                            <img src={"LI-In-Bug.png"} className="linkImage" />View my LinkedIn&trade; profile</a>
-                        <a href="https://github.com/RaymondThornley" className="externalLink">
-                            <img src={"GitHub-Mark-32px.png"} className="linkImage" />View my Github&trade; profile</a>
+                        <div className="infoSection">
+                            <h4 className="infoSectionTitle">About me</h4>
+                            <span className="infoSectionLine">Raymond Thornley is a 25 year old living in the Twin Cities.</span>
+                            <a href="https://www.linkedin.com/in/raymond-thornley-481847bb/" className="externalLink">
+                                <img src={"LI-In-Bug.png"} className="linkImage" />View my LinkedIn&trade; profile</a>
+                            <a href="https://github.com/RaymondThornley" className="externalLink">
+                                <img src={"GitHub-Mark-32px.png"} className="linkImage" />View my Github&trade; profile</a>
+                        </div>
                     </Col>
 
                     <Col xs={12} sm={{ span: 11, offset: 1 }} lg={{ span: 8, offset: 1 }}>
@@ -29,7 +31,7 @@ class HomePage extends React.Component {
                                 <li className="infoSectionListItem">I worked remotely with ten other programmers, most of them in India, in an Agile environment.</li>
                                 <li className="infoSectionListItem">I set up the front end testing environment using Enzyme and Jest.</li>
                             </ul>
-                            <span className="infoSectionLine">The seond project was the Indy Hub Website.</span>
+                            <span className="infoSectionLine">The second project was the Indy Hub Website.</span>
                             <ul className="infoSectionList">
                                 <li className="infoSectionListItem">The project is an internal website for the Infosys Indianapolis hub.</li>
                                 <li className="infoSectionListItem">I started the development if an application in TypeScript and Java.</li>
