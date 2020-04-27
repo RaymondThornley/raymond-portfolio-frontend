@@ -1,5 +1,8 @@
-.mainPage{
-    
+@media (min-width: 992px){
+    .mainPage{
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 }
 
 .mainPageTitle{
@@ -8,7 +11,6 @@
 
 .externalLink{
     display: block;
-    
 }
 
 .linkImage{

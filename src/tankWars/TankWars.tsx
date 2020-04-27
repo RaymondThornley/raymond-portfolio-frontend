@@ -1,3 +1,6 @@
+/* TankWars was originally written in HTML and Javascript
+*   It has been adapted to work in React and Typescript
+*/
 import React from 'react';
 
 type controlsType = {
@@ -72,7 +75,6 @@ type gameType = {
     twoKey: boolean,
     rKey: boolean,
     cKey: boolean,
-
 
     animationTimeout: number,
     ended: boolean,
