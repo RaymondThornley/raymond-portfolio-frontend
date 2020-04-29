@@ -6,11 +6,12 @@ class HomePage extends React.Component {
         return (
             <div className="mainPage">
                 <h1 className="mainPageTitle">Raymond Thornley</h1>
-                <Row>
-                    <Col xs={12} sm={{ order: 1, span: 4, offset: 0 }} >
+                <Row style={{ marginRight: 0 }}>
+                    <Col xs={12} sm={{ span: 10, offset: 1 }} lg={{ order: 1, span: 3, offset: 0 }} >
                         <div className="infoSection">
                             <h4 className="infoSectionTitle">About me</h4>
                             <span className="infoSectionLine">Raymond Thornley is a 25 year old living in the Twin Cities.</span>
+                            <img className="profilePicture" src={"RaymondThornley.jpg"} alt="" />
                             <a href="https://www.linkedin.com/in/raymond-thornley-481847bb/" className="externalLink">
                                 <img src={"LI-In-Bug.png"} className="linkImage" alt="" />View my LinkedIn&trade; profile</a>
                             <a href="https://github.com/RaymondThornley" className="externalLink">
@@ -18,7 +19,7 @@ class HomePage extends React.Component {
                         </div>
                     </Col>
 
-                    <Col xs={12} sm={8}>
+                    <Col xs={12} sm={{ span: 10, offset: 1 }} lg={{ span: 7, offset: 1 }}>
                         <div className="infoSection">
                             <h4 className="infoSectionTitle">Work Experience</h4>
                             <span className="infoSectionLine">I worked for Infosys as a Software Developer from October 2017 to February 2020.</span>

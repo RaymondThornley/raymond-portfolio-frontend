@@ -1,12 +1,31 @@
-@media (min-width: 992px){
-    .mainPage{
-        margin-left: 50px;
-        margin-right: 50px;
-    }
+.pageContainer{
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.pageContentConainer{
+    flex-grow: 1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.mainPage{
+    
 }
 
 .mainPageTitle{
     text-align: center;
+}
+
+.profilePicture{
+    margin: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #212529;
+    height: 322px;
+    width: 242px;
 }
 
 .externalLink{
@@ -39,6 +58,16 @@
 
 .infoSectionListItem{
     
+}
+
+.footerContainer{
+    flex-shrink: 0;
+    background-color: #343a40;
+    color: #fff;
+}
+
+.copyright{
+    margin-left: 20px;
 }
 
 .notFoundPage{

@@ -5,12 +5,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 class PageHeader extends React.Component {
     render() {
         return (
-            <Navbar expand="sm">
-                {/* <Navbar.Brand>Raymond Thornley</Navbar.Brand> */}
+            <Navbar expand="sm" bg="dark" variant="dark">
+                <LinkContainer to="/"><Navbar.Brand>Raymond Thornley</Navbar.Brand></LinkContainer>
                 <Navbar.Toggle aria-controls="header-nav" />
                 <Navbar.Collapse id="header-nav">
-                    <Nav>
-                        <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
+                    <Nav className="ml-auto">
                         <NavDropdown title="Mastermind" id="mastermindHeaderDropdown">
                             <LinkContainer to="/mastermind">
                                 <NavDropdown.Item>Play Game</NavDropdown.Item>
