@@ -135,32 +135,32 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
                         returnToSettings={this.returnToSettings}
                     />
                     :
-                    <div className="minesweeperSettingsContainer">
+                    <div className="gameSettingsContainer">
                             <Row className="rowNoMargin">
-                                <Col xs={12} sm={6} className="minesweeperSettingsLabelContainer">
-                                    <label htmlFor="xDimension" className="minesweeperSettingsLabel">X Dimension:</label>
+                                <Col xs={12} sm={6} className="gameSettingsLabelContainer">
+                                    <label htmlFor="xDimension" className="gameSettingsLabel">X Dimension:</label>
                                 </Col>
-                                <Col xs={12} sm={6} className="minesweeperSettingsOption">
+                                <Col xs={12} sm={6} className="gameSettingsOption">
                                     <input type="text" name="xDimension" value={this.state.xDimension}
                                         onChange={this.changeX} onBlur={this.blurX} />
                                     {this.state.hasXError ? <span>Error: Dimension value must not be blank or zero</span> : null}
                                 </Col>
                             </Row>
                             <Row className="rowNoMargin">
-                                <Col xs={12} sm={6} className="minesweeperSettingsLabelContainer">
-                                    <label htmlFor="yDimension" className="minesweeperSettingsLabel">Y Dimension:</label>
+                                <Col xs={12} sm={6} className="gameSettingsLabelContainer">
+                                    <label htmlFor="yDimension" className="gameSettingsLabel">Y Dimension:</label>
                                 </Col>
-                                <Col xs={12} sm={6} className="minesweeperSettingsOption">
+                                <Col xs={12} sm={6} className="gameSettingsOption">
                                     <input type="text" name="yDimension" value={this.state.yDimension}
                                         onChange={this.changeY} onBlur={this.blurY} />
                                     {this.state.hasYError ? <span>Error: Dimension value must not be blank or zero</span> : null}
                                 </Col>
                             </Row>
                             <Row className="rowNoMargin">
-                                <Col xs={12} sm={6} className="minesweeperSettingsLabelContainer">
-                                    <label htmlFor="mineNumber" className="minesweeperSettingsLabel">Mine Number:</label>
+                                <Col xs={12} sm={6} className="gameSettingsLabelContainer">
+                                    <label htmlFor="mineNumber" className="gameSettingsLabel">Mine Number:</label>
                                 </Col>
-                                <Col xs={12} sm={6} className="minesweeperSettingsOption">
+                                <Col xs={12} sm={6} className="gameSettingsOption">
                                     <input type="text" name="mineNumber" value={this.state.mineNumber}
                                         onChange={this.changeMine} onBlur={this.blurMine} />
                                     {this.state.hasMineError ? <span>Error: Mine value must not be blank or zero</span> : null}
