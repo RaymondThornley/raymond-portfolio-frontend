@@ -6,7 +6,7 @@ class HomePage extends React.Component {
         return (
             <div className="mainPage">
                 <h1 className="mainPageTitle">Raymond Thornley</h1>
-                <Row style={{ marginRight: 0 }}>
+                <Row className="rowNoMargin">
                     <Col xs={12} sm={{ span: 10, offset: 1 }} lg={{ order: 1, span: 3, offset: 0 }} >
                         <div className="infoSection">
                             <h4 className="infoSectionTitle">About me</h4>

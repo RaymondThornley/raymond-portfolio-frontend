@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import MinesweeperGame from './MinesweeperGame';
 import '../css/minesweeper.css';
 
@@ -135,38 +136,36 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
                     />
                     :
                     <div className="minesweeperSettingsContainer">
-                        <table className="minesweeperSettingsTable"><tbody>
-                            <tr>
-                                <td className="minesweeperSettingsTableLabel">
-                                    <label htmlFor="xDimension">X Dimension:</label>
-                                </td>
-                                <td className="minesweeperSettingsTableOption">
+                            <Row className="rowNoMargin">
+                                <Col xs={12} sm={6} className="minesweeperSettingsLabelContainer">
+                                    <label htmlFor="xDimension" className="minesweeperSettingsLabel">X Dimension:</label>
+                                </Col>
+                                <Col xs={12} sm={6} className="minesweeperSettingsOption">
                                     <input type="text" name="xDimension" value={this.state.xDimension}
                                         onChange={this.changeX} onBlur={this.blurX} />
                                     {this.state.hasXError ? <span>Error: Dimension value must not be blank or zero</span> : null}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="minesweeperSettingsTableLabel">
-                                    <label htmlFor="yDimension">Y Dimension:</label>
-                                </td>
-                                <td className="minesweeperSettingsTableOption">
+                                </Col>
+                            </Row>
+                            <Row className="rowNoMargin">
+                                <Col xs={12} sm={6} className="minesweeperSettingsLabelContainer">
+                                    <label htmlFor="yDimension" className="minesweeperSettingsLabel">Y Dimension:</label>
+                                </Col>
+                                <Col xs={12} sm={6} className="minesweeperSettingsOption">
                                     <input type="text" name="yDimension" value={this.state.yDimension}
                                         onChange={this.changeY} onBlur={this.blurY} />
                                     {this.state.hasYError ? <span>Error: Dimension value must not be blank or zero</span> : null}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="minesweeperSettingsTableLabel">
-                                    <label htmlFor="mineNumber">Mine Number:</label>
-                                </td>
-                                <td className="minesweeperSettingsTableOption">
+                                </Col>
+                            </Row>
+                            <Row className="rowNoMargin">
+                                <Col xs={12} sm={6} className="minesweeperSettingsLabelContainer">
+                                    <label htmlFor="mineNumber" className="minesweeperSettingsLabel">Mine Number:</label>
+                                </Col>
+                                <Col xs={12} sm={6} className="minesweeperSettingsOption">
                                     <input type="text" name="mineNumber" value={this.state.mineNumber}
                                         onChange={this.changeMine} onBlur={this.blurMine} />
                                     {this.state.hasMineError ? <span>Error: Mine value must not be blank or zero</span> : null}
-                                </td>
-                            </tr>
-                        </tbody></table>
+                                </Col>
+                            </Row>
                         {this.state.hasDimensionError ?
                             <div>{this.state.dimentionErrorText}</div> :
                             <div>{mineDensityText}</div>}
