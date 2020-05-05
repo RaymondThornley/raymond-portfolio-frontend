@@ -150,12 +150,12 @@ class Mastermind extends React.Component<{}, MastermindState> {
                         returnToSettings={this.returnToSettings}
                     />
                     :
-                    <div className="mastermindSettingsContainer">
+                    <div className="gameSettingsContainer">
                         <Row className="rowNoMargin">
-                            <Col xs={12} sm={6} className="mastermindSettingsLabelContainer">
-                                <label htmlFor="selectOption" className="mastermindSettingsLabel">Choose options:</label>
+                            <Col xs={12} sm={6} className="gameSettingsLabelContainer">
+                                <label htmlFor="selectOption" className="gameSettingsLabel">Choose options:</label>
                             </Col>
-                            <Col xs={12} sm={6} className="mastermindSettingsOption">
+                            <Col xs={12} sm={6} className="gameSettingsOption">
                                 <select name="selectOption" value={this.state.selectedOptionType}
                                     onChange={this.changeOption}>
                                     {optionList.map(this.createOption)}
@@ -163,29 +163,29 @@ class Mastermind extends React.Component<{}, MastermindState> {
                             </Col>
                         </Row>
                         <Row className="rowNoMargin">
-                            <Col xs={12} sm={6} className="mastermindSettingsLabelContainer">
-                                <label htmlFor="numItems" className="mastermindSettingsLabel">Number of items to guess:</label>
+                            <Col xs={12} sm={6} className="gameSettingsLabelContainer">
+                                <label htmlFor="numItems" className="gameSettingsLabel">Number of items to guess:</label>
                             </Col>
-                            <Col xs={12} sm={6} className="mastermindSettingsOption">
+                            <Col xs={12} sm={6} className="gameSettingsOption">
                                 <input type="text" name="numItems" value={this.state.numItems}
                                     onChange={this.changeItemNum} onBlur={this.blurItemNum} />
                                 {this.state.hasItemError ? <span>Error: Number of Items value must not be blank or zero</span> : null}
                             </Col>
                         </Row>
                         <Row className="rowNoMargin">
-                            <Col xs={12} sm={6} className="mastermindSettingsLabelContainer">
-                                <label htmlFor="allowDuplicates" className="mastermindSettingsLabel">Allow Duplicates:</label>
+                            <Col xs={12} sm={6} className="gameSettingsLabelContainer">
+                                <label htmlFor="allowDuplicates" className="gameSettingsLabel">Allow Duplicates:</label>
                             </Col>
-                            <Col xs={12} sm={6} className="mastermindSettingsOption">
+                            <Col xs={12} sm={6} className="gameSettingsOption">
                                 <input type="checkbox" name="allowDuplicates" checked={this.state.isDuplicatesAllowed}
                                     onChange={this.toggleDuplicates} />
                             </Col>
                         </Row>
                         <Row className="rowNoMargin">
-                            <Col xs={12} sm={6} className="mastermindSettingsLabelContainer">
-                                <label htmlFor="numGuesses" className="mastermindSettingsLabel">Number of guesses:</label>
+                            <Col xs={12} sm={6} className="gameSettingsLabelContainer">
+                                <label htmlFor="numGuesses" className="gameSettingsLabel">Number of guesses:</label>
                             </Col>
-                            <Col xs={12} sm={6} className="mastermindSettingsOption">
+                            <Col xs={12} sm={6} className="gameSettingsOption">
                                 <input type="text" name="numGuesses" value={this.state.numGuesses}
                                     onChange={this.changeGuessNum} onBlur={this.blurGuessNum} />
                                 {this.state.hasGuessError ? <span>Error: Number of Guesses value must not be blank or zero</span> : null}
