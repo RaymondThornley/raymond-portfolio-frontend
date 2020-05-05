@@ -24,7 +24,7 @@ class PageHeader extends React.Component {
                             <NavDropdown.Item href="https://github.com/RaymondThornley/raymond-portfolio-frontend/tree/master/src/minesweeper"
                             >View Code on GitHub&trade;</NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown title="Tank Wars" id="tankWarsHeaderDropdown">
+                        <NavDropdown title="Tank Wars" id="tankWarsHeaderDropdown" alignRight>
                             <LinkContainer to="/tankwars">
                                 <NavDropdown.Item>Play Game</NavDropdown.Item>
                             </LinkContainer>
