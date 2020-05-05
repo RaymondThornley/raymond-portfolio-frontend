@@ -126,7 +126,7 @@ class Minesweeper extends React.Component<{}, MinesweeperState> {
 
         return (
             <React.Fragment>
-                <h2 className="minesweeperTitle">Minesweeper</h2>
+                <h2 className="gameTitle">Minesweeper</h2>
                 {this.state.isGameActive ?
                     <MinesweeperGame
                         xDimension={Number(this.state.xDimension)}
