@@ -10,7 +10,7 @@ class HomePage extends React.Component {
                     <Col xs={12} sm={{ span: 10, offset: 1 }} lg={{ order: 1, span: 3, offset: 0 }} >
                         <div className="infoSection">
                             <h4 className="infoSectionTitle">About me</h4>
-                            <span className="infoSectionLine">Raymond Thornley is a 25 year old living in the Twin Cities.</span>
+                            <span className="infoSectionLine">Raymond Thornley is a 26 year old living in the Twin Cities.</span>
                             <img className="profilePicture" src={"RaymondThornley.jpg"} alt="" />
                             <a href="https://www.linkedin.com/in/raymond-thornley-481847bb/" className="externalLink">
                                 <img src={"LI-In-Bug.png"} className="linkImage" alt="" />View my LinkedIn&trade; profile</a>
@@ -27,7 +27,7 @@ class HomePage extends React.Component {
                             <span className="infoSectionLine">The first project was the Expert Services UI for John Deere.</span>
                             <ul className="infoSectionList">
                                 <li className="infoSectionListItem">The project is a website for John Deere employees and equipment dealers to track and manage equipment mantinence checklists.</li>
-                                <li className="infoSectionListItem">I refactored multiple React.js components to match the latest React and Javascript standards.</li>
+                                <li className="infoSectionListItem">I refactored multiple React.js components to match the latest React and Javascript ES6 standards.</li>
                                 <li className="infoSectionListItem">I updated the components to use Redux and the API calls to Axios.</li>
                                 <li className="infoSectionListItem">I worked remotely with ten other programmers, most of them in India, in an Agile environment.</li>
                                 <li className="infoSectionListItem">I set up the front end testing environment using Enzyme and Jest.</li>
@@ -35,7 +35,7 @@ class HomePage extends React.Component {
                             <span className="infoSectionLine">The second project was the Indy Hub Website.</span>
                             <ul className="infoSectionList">
                                 <li className="infoSectionListItem">The project is an internal website for the Infosys Indianapolis hub.</li>
-                                <li className="infoSectionListItem">I started the development if an application in TypeScript and Java.</li>
+                                <li className="infoSectionListItem">I started the development of an application in TypeScript and Java.</li>
                                 <li className="infoSectionListItem">We used Spring in the back-end and React in the front-end.</li>
                                 <li className="infoSectionListItem">I worked with a varying ammount of coworkers in Scrum. This varied from eight to fifteen other, mostly new hires fresh from college.</li>
                                 <li className="infoSectionListItem">I set up the front end testing environment using Enzyme and Jest.</li>
