@@ -138,7 +138,7 @@ class Mastermind extends React.Component<{}, MastermindState> {
 
         return (
             <React.Fragment>
-                <h2 className="mastermindTitle">Mastermind</h2>
+                <h2 className="gameTitle">Mastermind</h2>
                 {this.state.isGameActive ?
                     <MastermindGame
                         numOptions={optionList[this.state.selectedOptionType].numOptions}

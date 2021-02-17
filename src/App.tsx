@@ -4,6 +4,7 @@ import PageHeader from './page/PageHeader';
 import PageFooter from './page/PageFooter';
 import HomePage from './page/HomePage';
 import NotFoundPage from './page/NotFoundPage';
+import Connect from './connect/Connect';
 import Mastermind from './mastermind/Mastermind';
 import Minesweeper from './minesweeper/Minesweeper';
 import TankWars from './tankWars/TankWars';
@@ -19,6 +20,9 @@ function App() {
                     <Switch>
                         <Route exact path="/">
                             <HomePage />
+                        </Route>
+                        <Route path="/connect">
+                            <Connect />
                         </Route>
                         <Route path="/mastermind">
                             <Mastermind />
