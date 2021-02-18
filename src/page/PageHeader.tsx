@@ -10,6 +10,13 @@ class PageHeader extends React.Component {
                 <Navbar.Toggle aria-controls="header-nav" />
                 <Navbar.Collapse id="header-nav">
                     <Nav className="ml-auto">
+                        <NavDropdown title="Connect" id="connectHeaderDropdown">
+                            <LinkContainer to="/connect">
+                                <NavDropdown.Item>Play Game</NavDropdown.Item>
+                            </LinkContainer>
+                            <NavDropdown.Item href="https://github.com/RaymondThornley/raymond-portfolio-frontend/tree/master/src/connect"
+                            >View Code on GitHub&trade;</NavDropdown.Item>
+                        </NavDropdown>
                         <NavDropdown title="Mastermind" id="mastermindHeaderDropdown">
                             <LinkContainer to="/mastermind">
                                 <NavDropdown.Item>Play Game</NavDropdown.Item>
